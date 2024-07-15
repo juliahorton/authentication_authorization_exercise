@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-7">
+
+        <h1 class="display-2">{{user.username}}</h1>
+        <h2 class="display-5">First name: {{user.first_name.capitalize()}}</h2>
+        <h2 class="display-5">Last name: {{user.last_name.capitalize()}}</h2>
+        <h2 class="display-5">Email: {{user.email}}</h2>
+    </div>
+    <div id=user-feedback class="col-7">
+        <h1 class="display-5">Feedback</h1>
+        <a class="btn btn-primary btn-sm mb-2" href="/users/{{user.username}}/feedback/add">Add Feedback</a>
+        <ul>
+            {% for feedback in user.feedbacks %}
+            <li class="mb-1">
+                {{feedback.title}}
+                <a class="btn btn-primary btn-sm" href="/feedback/{{feedback.id}}/update">Edit</a>
+                <span>
+                    <form style="display:inline;" action="/feedback/{{feedback.id}}/delete" method="POST">
+                        <button class="btn btn-primary btn-sm">Delete</button>
+                    </form>
+                </span>
+                
+            </li>
+
+            {% endfor %}
+        </ul>
+
+    </div>
+    
+</div>
+
+
+
+{% endblock %}
